@@ -1,5 +1,6 @@
 package com.example.projetonassau;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -16,10 +17,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthActionCodeException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -99,9 +104,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getBaseContext(), "Conectado com sucesso!", Toast.LENGTH_LONG).show();
             startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
 
+            googleSignInClient.signOut();
+
         }
 
     }
+
+    private void adicionarContaGoogleFirebase (GoogleSignInAccount acct) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
+
+                        } else {
+
+                        }
+                    }
+                });
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -113,7 +138,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
+
+                adicionarContaGoogleFirebase(account);
 
             } catch (ApiException e) {
 
