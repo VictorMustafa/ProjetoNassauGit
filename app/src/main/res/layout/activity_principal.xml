@@ -23,6 +23,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="Download"/>
 
     </androidx.cardview.widget.CardView>
@@ -42,6 +44,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="Upload"/>
 
     </androidx.cardview.widget.CardView>
@@ -61,6 +65,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="Ler Dados"/>
 
     </androidx.cardview.widget.CardView>
@@ -80,6 +86,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="Gravar - Alterar - Excluir"/>
 
     </androidx.cardview.widget.CardView>
@@ -99,6 +107,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="Empresas"/>
 
     </androidx.cardview.widget.CardView>

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import android.Manifest;
+import android.widget.Toast;
 
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,7 +51,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         cardView_Database_GravarAlterarExcluir.setOnClickListener(this);
         cardView_Empresas.setOnClickListener(this);
 
-
+        pemissao();
 
     }
 
@@ -61,25 +63,39 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
             //Botão de Download
             case R.id.cardView_Storage_Download:
 
+                Toast.makeText(this,"cardView_Storage_Download",Toast.LENGTH_LONG).show();
+
                 break;
 
             //Botão de Upload
             case R.id.cardView_Storage_Upload:
+
+                Toast.makeText(this,"cardView_Storage_Upload",Toast.LENGTH_LONG).show();
+
 
                 break;
 
             //Botão de LerDados
             case R.id.cardView_Database_LerDados:
 
+                Toast.makeText(this,"cardView_Database_LerDados",Toast.LENGTH_LONG).show();
+
+
                 break;
 
             //Botão de GravarAlterarExcluir
             case R.id.cardView_Database_GravarAlterarExcluir:
 
+                Toast.makeText(this,"cardView_Database_GravarAlterarExcluir",Toast.LENGTH_LONG).show();
+
+
                 break;
 
             //Botão de Empresa
             case R.id.cardView_Empresas:
+
+                Toast.makeText(this,"cardView_Empresas",Toast.LENGTH_LONG).show();
+
 
                 break;
 
@@ -118,5 +134,16 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        for(int result:grantResults){
+
+            if (result == PackageManager.PERMISSION_DENIED){
+
+                Toast.makeText(this, "Aceite as permissões para o aplicativo  funcionar corretamente", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            }
+        }
+
     }
 }
