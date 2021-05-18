@@ -9,11 +9,13 @@
             <item
                 android:id="@+id/item_galeria"
                 android:title="Galeria"
+                android:icon="@drawable/ic_galeria_24"
                 app:showAsAction="always" />
 
             <item
                 android:id="@+id/item_camera"
                 android:title="Tirar Foto"
+                android:icon="@drawable/ic_camera_24"
                 app:showAsAction="always" />
 
 

@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.projetonassau.storage.StorageUploadActivity;
 import com.example.projetonassau.util.Permissao;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -70,7 +72,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
             //Botão de Upload
             case R.id.cardView_Storage_Upload:
 
-                Toast.makeText(this,"cardView_Storage_Upload",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getBaseContext(), StorageUploadActivity.class));
 
 
                 break;
