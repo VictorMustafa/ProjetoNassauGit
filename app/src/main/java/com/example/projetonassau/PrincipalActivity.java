@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private CardView cardView_Storage_Download;
     private CardView cardView_Storage_Upload;
     private CardView cardView_Database_LerDados;
     private CardView cardView_Database_GravarAlterarExcluir;
@@ -40,20 +39,18 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         button_Deslogar = (Button) findViewById(R.id.button_Deslogar);
         button_Deslogar.setOnClickListener(this);
 
-        cardView_Storage_Download = (CardView) findViewById(R.id.cardView_Storage_Download);
         cardView_Storage_Upload = (CardView) findViewById(R.id.cardView_Storage_Upload);
         cardView_Database_LerDados = (CardView) findViewById(R.id.cardView_Database_LerDados);
         cardView_Database_GravarAlterarExcluir = (CardView) findViewById(R.id.cardView_Database_GravarAlterarExcluir);
         cardView_Empresas = (CardView) findViewById(R.id.cardView_Empresas);
 
 
-        cardView_Storage_Download.setOnClickListener(this);
         cardView_Storage_Upload.setOnClickListener(this);
         cardView_Database_LerDados.setOnClickListener(this);
         cardView_Database_GravarAlterarExcluir.setOnClickListener(this);
         cardView_Empresas.setOnClickListener(this);
 
-        pemissao();
+        permissao();
 
     }
 
@@ -62,12 +59,6 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
 
         switch (v.getId()) {
 
-            //Botão de Download
-            case R.id.cardView_Storage_Download:
-
-                Toast.makeText(this,"cardView_Storage_Download",Toast.LENGTH_LONG).show();
-
-                break;
 
             //Botão de Upload
             case R.id.cardView_Storage_Upload:
@@ -120,7 +111,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
 
     //______________________________Pemissão do Usuário______________________________________________
 
-    private void pemissao(){
+    private void permissao(){
 
         String permissoes [] = new String[] {
 
