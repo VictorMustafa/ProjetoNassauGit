@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -26,8 +28,15 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.projetonassau.R;
+import com.example.projetonassau.util.DialogProgress;
 import com.example.projetonassau.util.Permissao;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class StorageUploadActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,6 +45,7 @@ public class StorageUploadActivity extends AppCompatActivity implements View.OnC
     private ImageView imageView;
     private Button button_Enviar;
     private Uri uri_Imagem;
+    private FirebaseStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,8 @@ public class StorageUploadActivity extends AppCompatActivity implements View.OnC
         button_Enviar = (Button) findViewById(R.id.button_StorageUpload_Enviar);
 
         button_Enviar.setOnClickListener(this);
+
+        storage = FirebaseStorage.getInstance();
 
         permissao();
 
@@ -72,13 +84,55 @@ public class StorageUploadActivity extends AppCompatActivity implements View.OnC
 
             case R.id.button_StorageUpload_Enviar:
 
-                Toast.makeText(getBaseContext(), "button_StorageUpload_Enviar", Toast.LENGTH_LONG).show();
+               upload_Imagem_1();
 
                 break;
 
         }
 
     }
+    //-----------------------------------------------------Upload de Imagens-----------------------------------------------
+
+    private void upload_Imagem_1(){
+
+        DialogProgress dialogProgress = new DialogProgress();
+        dialogProgress.show(getSupportFragmentManager(),"");
+
+        StorageReference reference = storage.getReference().child("upload").child("imagens");
+        StorageReference nome_Imagem = reference.child("ProjetoNassau"+System.currentTimeMillis()+".jpg");
+
+
+        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap =  drawable.getBitmap();
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+
+        UploadTask uploadTask = nome_Imagem.putBytes(bytes.toByteArray());
+
+        uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                if (task.isSuccessful()){
+
+                    dialogProgress.dismiss();
+                    Toast.makeText(getBaseContext(),"Sucesso ao Realizar Upload",Toast.LENGTH_LONG).show();
+
+                }else {
+
+                    dialogProgress.dismiss();
+                    Toast.makeText(getBaseContext(),"Erro ao Realizar Upload",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
+
+    }
+
+
 
 
     //-----------------------------------------------------Menu-----------------------------------------------
