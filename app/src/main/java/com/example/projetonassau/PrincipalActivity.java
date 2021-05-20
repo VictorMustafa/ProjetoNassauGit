@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.projetonassau.database.DatabaseLerDadosActivity;
 import com.example.projetonassau.storage.StorageUploadActivity;
 import com.example.projetonassau.util.Permissao;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -71,8 +72,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
             //Botão de LerDados
             case R.id.cardView_Database_LerDados:
 
-                Toast.makeText(this,"cardView_Database_LerDados",Toast.LENGTH_LONG).show();
-
+                startActivity(new Intent(getBaseContext(), DatabaseLerDadosActivity.class));
 
                 break;
 
