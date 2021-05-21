@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.projetonassau.database.DatabaseGravarAlterarRemoverActivity;
 import com.example.projetonassau.database.DatabaseLerDadosActivity;
 import com.example.projetonassau.storage.StorageUploadActivity;
 import com.example.projetonassau.util.Permissao;
@@ -79,7 +80,8 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
             //Botão de GravarAlterarExcluir
             case R.id.cardView_Database_GravarAlterarExcluir:
 
-                Toast.makeText(this,"cardView_Database_GravarAlterarExcluir",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getBaseContext(), DatabaseGravarAlterarRemoverActivity.class));
+
 
 
                 break;

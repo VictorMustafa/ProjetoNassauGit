@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoNassau">
-        <activity android:name=".database.DatabaseLerDadosActivity"></activity>
+        <activity android:name=".database.DatabaseGravarAlterarRemoverActivity"></activity>
+        <activity android:name=".database.DatabaseLerDadosActivity" />
         <activity android:name=".storage.StorageUploadActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
