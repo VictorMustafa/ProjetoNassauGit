@@ -84,6 +84,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
                 startActivity(new Intent(getBaseContext(), DatabaseGravarAlterarRemoverActivity.class));
 
 
+
                 break;
 
             //Botão de Empresa
@@ -91,16 +92,13 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
 
                 startActivity(new Intent(getBaseContext(), DatabaseListaEmpresaActivity.class));
 
-
                 break;
 
             //Botão de Deslogar
             case R.id.button_Deslogar:
                 FirebaseAuth.getInstance().signOut();
-                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .build();
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
+
                 googleSignInClient = GoogleSignIn.getClient(this, gso);
 
                 googleSignInClient.signOut();
@@ -111,7 +109,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    //______________________________Pemissão do Usuário______________________________________________
+    //___________Pemissão do Usuário_______________
 
     private void permissao(){
 

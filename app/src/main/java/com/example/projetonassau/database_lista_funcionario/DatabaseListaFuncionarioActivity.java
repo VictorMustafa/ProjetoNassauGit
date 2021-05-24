@@ -315,7 +315,7 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
 
         funcionario.setId_empresa(empresa.getId());
 
-        Intent intent = new Intent(getBaseContext(), DatabaseListaFuncionarioDadosActivity.class);
+        Intent intent = new Intent(getBaseContext(), DatabaseListaFuncionarioActivity.class);
 
         intent.putExtra("funcionario", funcionario);
 
@@ -394,7 +394,7 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
         uri_imagem = null;
         imagem_Selecionada = false;
 
-        imageView_Galeria.setImageResource(R.drawable.ic_galeria_24dp);
+        imageView_Galeria.setImageResource(R.drawable.ic_galeria_24);
 
 
     }
@@ -530,135 +530,6 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
     }
 
 
-    //------------------------------------------GERAR PDF----------------------------------------------------------------
-
-
-    private void gerarPDF() throws DocumentException, IOException {
-
-
-        ParcelFileDescriptor descriptor = null;
-        OutputStream outputStream;
-        File pdf = null;
-        Uri uri = null;
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
-            ContentValues contentValues = new ContentValues();
-
-            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf");
-            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "RelatorioFuncionarios" + System.currentTimeMillis());
-            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS);
-
-            ContentResolver resolver = getContentResolver();
-            uri = resolver.insert(MediaStore.Downloads.getContentUri("external"), contentValues);
-            descriptor = resolver.openFileDescriptor(uri, "rw");
-            outputStream = new FileOutputStream(descriptor.getFileDescriptor());
-
-
-        } else {
-
-            File diretorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-
-            String nomeArquivo = diretorio.getPath() + "/RelatorioFuncionarios" + System.currentTimeMillis() + ".pdf";
-            pdf = new File(nomeArquivo);
-            outputStream = new FileOutputStream(pdf);
-        }
-
-
-        Document document = new Document();
-
-
-        PdfCreator event = new PdfCreator();
-
-        PdfWriter writer = PdfWriter.getInstance(document, outputStream);
-
-        writer.setBoxSize("box_a", new Rectangle(36, 54, 559, 788));
-        writer.setPageEvent(event);
-
-
-        document.open();
-
-        Font font = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD);
-        Font font_dados = new Font(Font.FontFamily.HELVETICA, 20, Font.NORMAL);
-
-
-        Paragraph paragraph = new Paragraph("Relatório de Funcionarios", font);
-
-        paragraph.setAlignment(Element.ALIGN_CENTER);
-        document.add(paragraph);
-
-
-        PdfPTable table = new PdfPTable(2);
-        table.setWidthPercentage(100);
-        table.setSpacingBefore(30f);
-        table.setSpacingAfter(30f);
-
-
-        for (Funcionario funcionario : funcionarios) {
-
-
-            String dados = "Nome: " + funcionario.getNome() + "\n\nIdade: " + funcionario.getIdade();
-
-            PdfPCell cell = new PdfPCell(new Paragraph(dados, font_dados));
-            cell.setPadding(10);
-            cell.setBorder(Rectangle.NO_BORDER);
-            cell.setBorder(PdfPCell.NO_BORDER);
-
-            table.addCell(cell);
-
-        }
-
-        document.add(table);
-
-
-        document.close();
-        outputStream.close();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
-            descriptor.close();
-            visualizarPDF(pdf, uri);
-
-        } else {
-            visualizarPDF(pdf, uri);
-        }
-
-
-    }
-
-
-    private void visualizarPDF(File pdf, Uri uri) {
-
-        PackageManager packageManager = getPackageManager();
-
-        Intent itent = new Intent(Intent.ACTION_VIEW);
-        itent.setType("application/pdf");
-        List<ResolveInfo> lista = packageManager.queryIntentActivities(itent, PackageManager.MATCH_DEFAULT_ONLY);
-
-        if (lista.size() > 0) {
-
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-            if (pdf == null) { // versao mais nova android
-
-                intent.setDataAndType(uri, "application/pdf");
-
-            } else { // versao mais antiga android
-
-                Uri uri1 = FileProvider.getUriForFile(getBaseContext(), "com.example.mac.firebasecursods", pdf);
-                intent.setDataAndType(uri1, "application/pdf");
-            }
-
-            startActivity(intent);
-        } else {
-
-            DialogAlerta dialogAlerta = new DialogAlerta("Erro ao Abrir PDF", "Não foi detectado nenhum leitor de PDF no seu Dispositivo.");
-            dialogAlerta.show(getSupportFragmentManager(), "3");
-        }
-    }
-
 
     //---------------------------------------Ouvinte ---------------------------------------------------
 
@@ -790,46 +661,6 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
         }
     }
 
-
-    private class GerarPDF extends AsyncTask<Void, Void, Void> {
-
-
-        private DialogProgress dialogProgress;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            dialogProgress = new DialogProgress();
-            dialogProgress.show(getSupportFragmentManager(), "2");
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            try {
-                gerarPDF();
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            dialogProgress.dismiss();
-        }
-
-
-    }
 
 
 }

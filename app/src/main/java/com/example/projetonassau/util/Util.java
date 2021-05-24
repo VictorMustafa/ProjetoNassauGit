@@ -14,7 +14,7 @@ public class Util {
 
         ConnectivityManager conexao = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (conexao != null) {
+        if (conexao != null){
 
             // PARA DISPOSTIVOS NOVOS
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -28,7 +28,8 @@ public class Util {
                         //VERIFICAMOS SE DISPOSITIVO TEM 3G
                         return true;
 
-                    } else if (recursosRede.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    }
+                    else if (recursosRede.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
 
                         //VERIFICAMOS SE DISPOSITIVO TEM WIFFI
                         return true;
@@ -59,30 +60,38 @@ public class Util {
     }
 
 
-    public static boolean verificarCampos(Context context, String texto_1, String texto_2) {
 
 
-        if (!texto_1.isEmpty() && !texto_2.isEmpty()) {
 
-            if (statusInternet(context)) {
+
+    public static boolean verificarCampos(Context context, String texto_1, String texto_2){
+
+
+        if( !texto_1.isEmpty() && !texto_2.isEmpty()){
+
+            if( statusInternet(context)){
 
                 return true;
 
-            } else {
+            }else{
 
-                Toast.makeText(context, "Sem conexão com a Internet", Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Sem conexão com a Internet",Toast.LENGTH_LONG).show();
 
                 return false;
             }
 
-        } else {
+        }else{
 
-            Toast.makeText(context, "Preencha os campos", Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Preencha os campos",Toast.LENGTH_LONG).show();
             return false;
         }
 
 
+
+
     }
+
+
 
 
 }

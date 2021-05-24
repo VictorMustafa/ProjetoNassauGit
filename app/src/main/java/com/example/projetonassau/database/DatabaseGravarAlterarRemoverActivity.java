@@ -2,7 +2,6 @@ package com.example.projetonassau.database;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class DatabaseGravarAlterarRemoverActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -33,7 +33,10 @@ public class DatabaseGravarAlterarRemoverActivity extends AppCompatActivity impl
     private Button button_Remover;
 
     private FirebaseDatabase database;
+    private boolean firebaseOffline = false;
+
     private DialogProgress progress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,55 +44,95 @@ public class DatabaseGravarAlterarRemoverActivity extends AppCompatActivity impl
         setContentView(R.layout.database_gravar_alterar_remover_activity);
 
 
-        editText_NomePasta = (EditText) findViewById(R.id.editText_Database_GravarAlterarRemover_NomePasta);
-        editText_Nome = (EditText) findViewById(R.id.editText_Database_GravarAlterarRemover_Nome);
-        editText_Idade = (EditText) findViewById(R.id.editText_Database_GravarAlterarRemover_Idade);
+
+        editText_NomePasta = (EditText)findViewById(R.id.editText_Database_GravarAlterarRemover_NomePasta);
+        editText_Nome = (EditText)findViewById(R.id.editText_Database_GravarAlterarRemover_Nome);
+        editText_Idade = (EditText)findViewById(R.id.editText_Database_GravarAlterarRemover_Idade);
 
 
-        button_Salvar = (Button) findViewById(R.id.button_Database_GravarAlterarRemover_Salvar);
-        button_Alterar = (Button) findViewById(R.id.button_Database_GravarAlterarRemover_Alterar);
-        button_Remover = (Button) findViewById(R.id.button_Database_GravarAlterarRemover_Remover);
+        button_Salvar = (Button)findViewById(R.id.button_Database_GravarAlterarRemover_Salvar);
+        button_Alterar = (Button)findViewById(R.id.button_Database_GravarAlterarRemover_Alterar);
+        button_Remover = (Button)findViewById(R.id.button_Database_GravarAlterarRemover_Remover);
 
 
         button_Salvar.setOnClickListener(this);
         button_Alterar.setOnClickListener(this);
         button_Remover.setOnClickListener(this);
 
+
+
+
         database = FirebaseDatabase.getInstance();
+
+
+        // ativarFirebaseOffline();
 
 
     }
 
 
-    //-------------------------------------Tratamentos de Clicks---------------------------------
+    private void ativarFirebaseOffline(){
+
+
+        try{
+            if(!firebaseOffline){
+
+                FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+                firebaseOffline = true;
+
+            }else{
+
+                //firebase ja estiver funcionando offline
+            }
+
+
+        }catch(Exception e){
+            //erro
+        }
+    }
+
+
+
+
+
+    //-----------------------------------------TRATAMENTO DE CLICKS------------------------------------------------
+
     @Override
     public void onClick(View v) {
 
 
-        switch (v.getId()) {
+        switch (v.getId()){
 
             case R.id.button_Database_GravarAlterarRemover_Salvar:
+
 
                 buttonSalvar();
 
                 break;
 
+
             case R.id.button_Database_GravarAlterarRemover_Alterar:
 
                 buttonAlterar();
 
+
                 break;
 
+
             case R.id.button_Database_GravarAlterarRemover_Remover:
+
 
                 buttonRemover();
 
                 break;
 
         }
+
     }
 
-    //------------------------ Butões Salvar, Alterar e Remover-------------------------------------
+    //-----------------------------------------BUTTONS ONCLIK Salvar Alterar Remover------------------------------------------------
+
 
     private void buttonSalvar(){
 
@@ -111,6 +154,9 @@ public class DatabaseGravarAlterarRemoverActivity extends AppCompatActivity impl
         }
     }
 
+
+
+
     private void buttonAlterar(){
 
 
@@ -130,6 +176,9 @@ public class DatabaseGravarAlterarRemoverActivity extends AppCompatActivity impl
         }
 
     }
+
+
+
 
     private void buttonRemover(){
 
@@ -157,7 +206,12 @@ public class DatabaseGravarAlterarRemoverActivity extends AppCompatActivity impl
 
 
 
-    //---------------------------------- Salvar - Alterar - Remover -------------------------------------
+
+
+
+    //-----------------------------------------Salvar Alterar Remover------------------------------------------------
+
+
     private void salvarDados(String nome, int idade){
 
         progress = new DialogProgress();
@@ -189,6 +243,11 @@ public class DatabaseGravarAlterarRemoverActivity extends AppCompatActivity impl
         });
 
     }
+
+
+
+
+
 
     private void alterarDados(String nome, int idade){
 
@@ -245,6 +304,9 @@ public class DatabaseGravarAlterarRemoverActivity extends AppCompatActivity impl
         }
 
     }
+
+
+
 
     private void removerDados(String nome_Pasta){
 

@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.projetonassau">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,9 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoNassau">
-        <activity android:name=".database_lista_funcionario.DatabaseListaFuncionarioActivity"></activity>
-        <activity android:name=".database_lista_empresa.DatabaseListaEmpresaActivity" />
-        <activity android:name=".database.DatabaseGravarAlterarRemoverActivity" />
+        <activity android:name=".database.DatabaseGravarAlterarRemoverActivity"></activity>
         <activity android:name=".database.DatabaseLerDadosActivity" />
         <activity android:name=".storage.StorageUploadActivity" />
         <activity android:name=".MainActivity">
