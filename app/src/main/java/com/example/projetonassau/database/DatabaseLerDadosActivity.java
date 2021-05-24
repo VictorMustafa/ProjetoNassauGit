@@ -9,11 +9,16 @@ import android.widget.TextView;
 import com.example.projetonassau.R;
 import com.example.projetonassau.util.DialogAlerta;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseLerDadosActivity extends AppCompatActivity {
 
@@ -28,6 +33,7 @@ public class DatabaseLerDadosActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private ValueEventListener valueEventListener;
+    private ChildEventListener childEventListener;
 
 
 
@@ -55,15 +61,15 @@ public class DatabaseLerDadosActivity extends AppCompatActivity {
 
     private void ouvinte_1() {
 
-        DatabaseReference reference = database.getReference().child("BD").child("Gerente").child("1");
+        DatabaseReference reference = database.getReference().child("BD").child("Gerentes").child("1");
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                String nome = snapshot.child("Nome").getValue(String.class);
-                int idade = snapshot.child("Idade").getValue(int.class);
-                boolean aluno = snapshot.child("Aluno").getValue(boolean.class);
+                String nome = snapshot.child("nome").getValue(String.class);
+                int idade = snapshot.child("idade").getValue(int.class);
+                boolean aluno = snapshot.child("aluno").getValue(boolean.class);
 
 
                 DialogAlerta dialogAlerta = new DialogAlerta("Valor", nome + "\n" + idade + "\n" + aluno);

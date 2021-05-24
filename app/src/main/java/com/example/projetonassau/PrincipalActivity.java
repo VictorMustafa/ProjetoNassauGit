@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.projetonassau.database.DatabaseGravarAlterarRemoverActivity;
 import com.example.projetonassau.database.DatabaseLerDadosActivity;
+import com.example.projetonassau.database_lista_empresa.DatabaseListaEmpresaActivity;
 import com.example.projetonassau.storage.StorageUploadActivity;
 import com.example.projetonassau.util.Permissao;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -79,7 +81,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
             //Botão de GravarAlterarExcluir
             case R.id.cardView_Database_GravarAlterarExcluir:
 
-                Toast.makeText(this,"cardView_Database_GravarAlterarExcluir",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getBaseContext(), DatabaseGravarAlterarRemoverActivity.class));
 
 
                 break;
@@ -87,7 +89,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
             //Botão de Empresa
             case R.id.cardView_Empresas:
 
-                Toast.makeText(this,"cardView_Empresas",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getBaseContext(), DatabaseListaEmpresaActivity.class));
 
 
                 break;
