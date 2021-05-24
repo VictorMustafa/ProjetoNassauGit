@@ -27,6 +27,11 @@
         <activity android:name=".CadastrarActivity" />
         <activity android:name=".LoginEmailActivity" />
         <activity android:name=".PrincipalActivity" />
+        <activity android:name=".database_lista_empresa.DatabaseListaEmpresaActivity" />
+        <activity android:name=".database_lista_funcionario.DatabaseListaFuncionarioActivity" />
+
+
+
 
         <provider
             android:name="androidx.core.content.FileProvider"
