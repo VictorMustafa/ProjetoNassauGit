@@ -51,11 +51,10 @@ public class RecyclerView_ListaEmpresa extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
 
-        final Empresa empresa = empresas.get(position);
+         Empresa empresa = empresas.get(position);
 
 
         holder.textView_Nome.setText(empresa.getNome());
-
 
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

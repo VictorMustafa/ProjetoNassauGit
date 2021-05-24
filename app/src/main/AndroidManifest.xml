@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoNassau">
-        <activity android:name=".database.DatabaseGravarAlterarRemoverActivity"></activity>
+        <activity android:name=".database_lista_funcionario.DatabaseListaFuncionarioDadosActivity"></activity>
+        <activity android:name=".database.DatabaseGravarAlterarRemoverActivity" />
         <activity android:name=".database.DatabaseLerDadosActivity" />
         <activity android:name=".storage.StorageUploadActivity" />
         <activity android:name=".MainActivity">
@@ -27,6 +28,8 @@
         <activity android:name=".CadastrarActivity" />
         <activity android:name=".LoginEmailActivity" />
         <activity android:name=".PrincipalActivity" />
+        <activity android:name=".database_lista_empresa.DatabaseListaEmpresaActivity" />
+        <activity android:name=".database_lista_funcionario.DatabaseListaFuncionarioActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
