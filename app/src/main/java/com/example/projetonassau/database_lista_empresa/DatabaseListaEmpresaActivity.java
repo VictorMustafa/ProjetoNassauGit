@@ -189,6 +189,7 @@ public class DatabaseListaEmpresaActivity extends AppCompatActivity implements R
 
 
 
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView_listaEmpresa = new RecyclerView_ListaEmpresa(getBaseContext(),empresas,this);
@@ -210,7 +211,7 @@ public class DatabaseListaEmpresaActivity extends AppCompatActivity implements R
 
         startActivity(intent);
 
-        // Toast.makeText(getBaseContext(),"Nome: "+empresa.getNome()+"\n\nPasta: "+empresa.getId(),Toast.LENGTH_LONG).show();
+         Toast.makeText(getBaseContext(),"Nome: "+empresa.getNome()+"\n\nPasta: "+empresa.getId(),Toast.LENGTH_LONG).show();
 
     }
 

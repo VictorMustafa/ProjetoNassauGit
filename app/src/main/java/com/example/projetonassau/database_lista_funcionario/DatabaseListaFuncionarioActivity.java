@@ -86,6 +86,9 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
 
     private Button button_Salvar;
     private ImageView imageView_Galeria;
+    private ImageView imageView_Camera;
+
+    private Uri uri_Imagem;
 
 
     private RecyclerView recyclerView;
@@ -123,6 +126,8 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
 
         button_Salvar = (Button) findViewById(R.id.button_Database_Funcionario_Salvar);
         imageView_Galeria = (ImageView) findViewById(R.id.imageView_Database_Funcionario_Imagem);
+        imageView_Camera = (ImageView) findViewById(R.id.imageView_Database_Funcionario_Upload);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_Database_Funcionario_Lista);
 
@@ -130,6 +135,7 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
         imageView_LimparCampos.setOnClickListener(this);
         button_Salvar.setOnClickListener(this);
         imageView_Galeria.setOnClickListener(this);
+        imageView_Camera.setOnClickListener(this);
 
 
         database = FirebaseDatabase.getInstance();
@@ -209,6 +215,13 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
 
                 break;
 
+            case R.id.imageView_Database_Funcionario_Upload:
+
+
+                obterImagem_Camera();
+
+                break;
+
         }
 
     }
@@ -277,36 +290,11 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
                 return true;
 
 
-           /* case R.id.item_criar_pdf_funcionarios:
-
-
-
-                itemCriarPdf();
-
-
-                return true;*/
-
         }
 
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    /*private void itemCriarPdf(){
-
-        if(funcionarios.size() > 0){
-
-            new GerarPDF().execute();
-
-        }else{
-
-            DialogAlerta alerta = new DialogAlerta("Erro ao gerar PDF","Não existem Funcionários para gerar o Relatório PDF");
-            alerta.show(getSupportFragmentManager(),"1");
-        }
-
-
-    }*/
 
 
     @Override
@@ -315,7 +303,7 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
 
         funcionario.setId_empresa(empresa.getId());
 
-        Intent intent = new Intent(getBaseContext(), DatabaseListaFuncionarioActivity.class);
+        Intent intent = new Intent(getBaseContext(), DatabaseListaFuncionarioDadosActivity.class);
 
         intent.putExtra("funcionario", funcionario);
 
@@ -327,6 +315,26 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
 
     //---------------------------------------- OBTER IMAGENS ----------------------------------------------------------------
 
+
+
+    private void obterImagem_Camera() {
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File diretorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+        String nomeImagem = diretorio.getPath() + "/" + "CursoImagem" + System.currentTimeMillis() + ".jpg";
+
+        File file = new File(nomeImagem);
+
+        String autorizacao = "com.example.projetonassau";
+
+        uri_Imagem = FileProvider.getUriForFile(getBaseContext(), autorizacao, file);
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri_Imagem);
+
+        startActivityForResult(Intent.createChooser(intent, "Escolha uma Imagem"), 0);
+
+    }
 
     private void obterImagem_Galeria() {
 
@@ -530,7 +538,6 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
     }
 
 
-
     //---------------------------------------Ouvinte ---------------------------------------------------
 
 
@@ -660,7 +667,6 @@ public class DatabaseListaFuncionarioActivity extends AppCompatActivity implemen
             reference_database.removeEventListener(childEventListener);
         }
     }
-
 
 
 }

@@ -38,7 +38,7 @@
                 android:id="@+id/editText_Database_Funcionario_Nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome"
+                android:hint="Aluno"
                 android:padding="10dp"
                 android:textSize="17sp" />
 
@@ -47,7 +47,7 @@
                 android:id="@+id/editText_Database_Funcionario_Idade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Idade"
+                android:hint="Semestre"
                 android:inputType="number"
                 android:padding="10dp"
                 android:textSize="17sp" />
@@ -78,6 +78,14 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:src="@drawable/ic_galeria_24" />
+
+                <ImageView
+                    android:id="@+id/imageView_Database_Funcionario_Upload"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_camera_24" />
 
 
             </LinearLayout>
