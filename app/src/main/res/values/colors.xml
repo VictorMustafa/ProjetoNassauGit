@@ -9,5 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#FF100000</color>
     <color name="colorPrimary">#4F4F4F</color>
+    <color name="colorSecundary">#FFDE13</color>
+    <color name="purple_600">#6200ee</color>
+    <color name="colorTerceiro">#757575</color>
 
 </resources>

@@ -26,10 +26,9 @@ import android.widget.Toast;
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener {
 
     private CardView cardView_Storage_Upload;
-    private CardView cardView_Database_LerDados;
-    private CardView cardView_Database_GravarAlterarExcluir;
+    //private CardView cardView_Database_LerDados;
+    //private CardView cardView_Database_GravarAlterarExcluir;
     private CardView cardView_Empresas;
-
     private Button button_Deslogar;
     private GoogleSignInClient googleSignInClient;
 
@@ -43,14 +42,14 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         button_Deslogar.setOnClickListener(this);
 
         cardView_Storage_Upload = (CardView) findViewById(R.id.cardView_Storage_Upload);
-        cardView_Database_LerDados = (CardView) findViewById(R.id.cardView_Database_LerDados);
-        cardView_Database_GravarAlterarExcluir = (CardView) findViewById(R.id.cardView_Database_GravarAlterarExcluir);
+        //cardView_Database_LerDados = (CardView) findViewById(R.id.cardView_Database_LerDados);
+        //cardView_Database_GravarAlterarExcluir = (CardView) findViewById(R.id.cardView_Database_GravarAlterarExcluir);
         cardView_Empresas = (CardView) findViewById(R.id.cardView_Empresas);
 
 
         cardView_Storage_Upload.setOnClickListener(this);
-        cardView_Database_LerDados.setOnClickListener(this);
-        cardView_Database_GravarAlterarExcluir.setOnClickListener(this);
+        //cardView_Database_LerDados.setOnClickListener(this);
+        //cardView_Database_GravarAlterarExcluir.setOnClickListener(this);
         cardView_Empresas.setOnClickListener(this);
 
         permissao();
@@ -71,21 +70,20 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
 
                 break;
 
-            //Botão de LerDados
-            case R.id.cardView_Database_LerDados:
+//            Botão de LerDados
+//            case R.id.cardView_Database_LerDados:
+//
+//                startActivity(new Intent(getBaseContext(), DatabaseLerDadosActivity.class));
+//
+//                break;
+//
+//            Botão de GravarAlterarExcluir
+//            case R.id.cardView_Database_GravarAlterarExcluir:
+//
+//                startActivity(new Intent(getBaseContext(), DatabaseGravarAlterarRemoverActivity.class));
+//
+//                break;
 
-                startActivity(new Intent(getBaseContext(), DatabaseLerDadosActivity.class));
-
-                break;
-
-            //Botão de GravarAlterarExcluir
-            case R.id.cardView_Database_GravarAlterarExcluir:
-
-                startActivity(new Intent(getBaseContext(), DatabaseGravarAlterarRemoverActivity.class));
-
-
-
-                break;
 
             //Botão de Empresa
             case R.id.cardView_Empresas:
